@@ -1,0 +1,77 @@
+{
+  "entities": {
+    "StaffPin": {
+      "title": "StaffPin",
+      "description": "Hashed 4-digit PIN for mess staff authorization",
+      "type": "object",
+      "properties": {
+        "pinHash": { "type": "string", "description": "Hashed staff PIN" },
+        "updatedAt": { "type": "string", "description": "Last updated timestamp" }
+      },
+      "required": ["pinHash"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Hostel mess registered student with reference photo",
+      "type": "object",
+      "properties": {
+        "gr": { "type": "string", "description": "Unique GR number" },
+        "name": { "type": "string", "description": "Student full name" },
+        "hostel": { "type": "string", "enum": ["A", "B", "C", "D", "Other"], "description": "Hostel block" },
+        "photoUrl": { "type": "string", "description": "Reference face photo URL" },
+        "hasPhoto": { "type": "boolean", "description": "Whether reference photo exists" },
+        "createdAt": { "type": "string", "description": "Created ISO timestamp" }
+      },
+      "required": ["gr", "name", "hostel"]
+    },
+    "WasteRecord": {
+      "title": "WasteRecord",
+      "description": "Food waste incident record with student and plate photo",
+      "type": "object",
+      "properties": {
+        "studentGr": { "type": "string", "description": "Student GR number" },
+        "studentName": { "type": "string", "description": "Student full name" },
+        "hostel": { "type": "string", "enum": ["A", "B", "C", "D", "Other"], "description": "Hostel block" },
+        "session": { "type": "string", "enum": ["Breakfast", "Lunch", "Dinner"], "description": "Meal session" },
+        "wasteLevel": { "type": "string", "enum": ["None", "Low", "Medium", "High"], "description": "Food waste level" },
+        "reason": { "type": "string", "description": "AI analysis or note" },
+        "photoUrl": { "type": "string", "description": "Captured photo URL" },
+        "isVerified": { "type": "boolean", "description": "Mess manager verification flag" },
+        "timestamp": { "type": "string", "description": "Incident ISO timestamp" }
+      },
+      "required": ["studentGr", "studentName", "hostel", "session", "wasteLevel", "timestamp"]
+    },
+    "Report": {
+      "title": "Report",
+      "description": "Generated PDF summary report",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Report title" },
+        "date": { "type": "string", "description": "Report date string" },
+        "session": { "type": "string", "description": "Session filter" },
+        "totalRecords": { "type": "number", "description": "Count of waste records included" },
+        "pdfUrl": { "type": "string", "description": "PDF data or storage URL" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      },
+      "required": ["title", "date", "session", "totalRecords", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/settings/{settingId}": {
+      "schema": "StaffPin",
+      "description": "Staff PIN and system settings"
+    },
+    "/students/{studentId}": {
+      "schema": "Student",
+      "description": "Hostel student registry"
+    },
+    "/waste_records/{recordId}": {
+      "schema": "WasteRecord",
+      "description": "Mess food wastage incidents"
+    },
+    "/reports/{reportId}": {
+      "schema": "Report",
+      "description": "Generated mess waste PDF reports"
+    }
+  }
+}

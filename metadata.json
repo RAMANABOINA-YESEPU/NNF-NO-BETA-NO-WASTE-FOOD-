@@ -1,0 +1,10 @@
+{
+  "name": "NNF – No Beta No Waste Food",
+  "description": "Hostel mess staff food wastage monitoring system with student identification, waste level recording, and PDF reports.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

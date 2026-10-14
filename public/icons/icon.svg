@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="50%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#064e3b"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="168" fill="url(#plate)" filter="url(#shadow)"/>
+  <circle cx="256" cy="256" r="132" fill="none" stroke="#cbd5e1" stroke-width="6"/>
+  <!-- Cutlery Fork and Spoon -->
+  <g fill="#0f766e" stroke="#0f766e" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Fork left -->
+    <path d="M190 170 v50 c0 18 12 32 28 34 v96 a6 6 0 0 0 12 0 v-96 c16 -2 28 -16 28 -34 v-50" fill="none" stroke-width="10"/>
+    <path d="M208 170 v40 M222 170 v40" stroke-width="8"/>
+    <!-- Knife/Spoon right -->
+    <path d="M304 170 c-18 10 -24 35 -24 60 c0 16 10 28 24 30 v100 a6 6 0 0 0 12 0 v-190 z" fill="#0f766e"/>
+  </g>
+  <!-- NNF Badge bottom -->
+  <rect x="156" y="380" width="200" height="48" rx="24" fill="#022c22" stroke="#34d399" stroke-width="4"/>
+  <text x="256" y="412" font-family="Plus Jakarta Sans, sans-serif" font-size="24" font-weight="900" fill="#34d399" text-anchor="middle" letter-spacing="2">NNF MESS</text>
+</svg>

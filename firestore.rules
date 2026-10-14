@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // App settings (staff PIN, connection test)
+    match /settings/{settingId} {
+      allow read: if settingId in ['pin', 'app_config', 'connection_test'];
+      allow write: if settingId in ['pin', 'app_config']
+        && request.resource.data.size() <= 10;
+    }
+
+    // Students registry
+    match /students/{studentId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.gr is string
+        && request.resource.data.gr.size() <= 64
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 128
+        && request.resource.data.hostel in ['A', 'B', 'C', 'D', 'Other'];
+      allow delete: if true;
+    }
+
+    // Waste records
+    match /waste_records/{recordId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.studentGr is string
+        && request.resource.data.studentName is string
+        && request.resource.data.hostel in ['A', 'B', 'C', 'D', 'Other']
+        && request.resource.data.session in ['Breakfast', 'Lunch', 'Dinner']
+        && request.resource.data.wasteLevel in ['None', 'Low', 'Medium', 'High'];
+      allow delete: if true;
+    }
+
+    // PDF Reports
+    match /reports/{reportId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.title is string
+        && request.resource.data.date is string;
+      allow delete: if true;
+    }
+  }
+}
